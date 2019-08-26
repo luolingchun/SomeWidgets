@@ -20,9 +20,9 @@ class Window(QWidget):
     def show_progress(self):
         self.spd = SProgressDialog(self, label_text='loading...')
         self.spd.setModal(True)
-        # 获取标签文本
+        # 标签文本
         print(self.spd.label_text)
-        # 获取取消那妞
+        # 取消按钮
         cancel_button = self.spd.cancel_button
         # 隐藏取消按钮
         # cancel_button.hide()
