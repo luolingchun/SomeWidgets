@@ -4,7 +4,8 @@
 # @Time    : 2019/8/25 15:28
 # @File    : progress_dialog.py
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog, QGridLayout, QLabel, QProgressBar, QPushButton, QWidget, QHBoxLayout
+from PyQt5.QtWidgets import QDialog, QGridLayout, QLabel, QProgressBar, QPushButton, QWidget, QHBoxLayout, \
+    QGraphicsDropShadowEffect
 
 
 class SProgressDialog(QDialog):
@@ -20,46 +21,52 @@ class SProgressDialog(QDialog):
 
         # QSS
         self._qss = """
-            #SProgressDialog > QWidget{
-                border:0px solid green;
-                border-radius:10px;
-                background-color:rgba(0, 200, 0, 150);
-            }
-            
-            #SProgressDialog > QWidget > QLabel{
-                border:0px;
-                font-size:14px;
-            }
-            
-            #SProgressDialog > QWidget > QPushButton{
-                border:0px;
-                min-width:40px;
-                min-height:20px;
-                font-size:12px;
-            }
-            
-            #SProgressDialog > QWidget > QPushButton:hover{
-                border-radius:10px;
-                font-size:12px;
-                background-color:rgba(200, 100, 0,150);
-            }
-            
-            #SProgressDialog > QWidget > QProgressBar{
-                border:0px;
-                border-radius:5px;
-                text-align:center;
-                background-color:rgba(255,255,255,150);
-            }
-            
-            #SProgressDialog > QWidget > QProgressBar::chunk {
-                border-radius:5px;
-                background-color:rgba(0, 100, 200,150);
-            }
+#SProgressDialog > QWidget{
+	border:0px solid green;
+	border-radius:10px;
+	background-color:rgba(100, 200, 0, 70%);
+}
+
+#SProgressDialog > QWidget > QLabel{
+	border:0px;
+	font-size:14px;
+}
+
+#SProgressDialog > QWidget > QPushButton{
+	border:0px;
+	min-width:40px;
+	min-height:20px;
+	font-size:12px;
+}
+
+#SProgressDialog > QWidget > QPushButton:hover{
+	border-radius:10px;
+	font-size:12px;
+	background-color:rgba(200, 100, 0, 70%);
+}
+
+#SProgressDialog > QWidget > QProgressBar{
+	border:0px;
+	border-radius:7px;
+	max-height:14px;
+	text-align:center;
+	background-color:rgba(255, 255, 255, 70%);
+}
+
+#SProgressDialog > QWidget > QProgressBar::chunk {
+	border-radius:7px;
+	background-color:rgba(0, 100, 200, 70%);
+}
         """
         self.setStyleSheet(self._qss)
 
     def _setup_ui(self, label_text):
+        ds_effect = QGraphicsDropShadowEffect()
+        ds_effect.setOffset(5, 5)
+        ds_effect.setColor(Qt.gray)
+        ds_effect.setBlurRadius(10)
         self._widget = QWidget(self)
+        self._widget.setGraphicsEffect(ds_effect)
         hl = QHBoxLayout(self)
         hl.addWidget(self._widget)
         self._label = QLabel(label_text, self._widget)
@@ -90,8 +97,8 @@ class SProgressDialog(QDialog):
     def qss(self):
         return self._qss
 
-    def hide_cancel_button(self):
-        self._pushbutton.hide()
+    def hide_shadow(self):
+        self._widget.setGraphicsEffect(None)
 
 
 if __name__ == '__main__':
@@ -99,6 +106,7 @@ if __name__ == '__main__':
 
     app = QApplication([])
     window = SProgressDialog(label_text='正在处理...')
+    window._progress_bar.setValue(50)
     window.show()
 
     from pyqss import Qss

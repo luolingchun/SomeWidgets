@@ -4,7 +4,7 @@
 # @Time    : 2019/8/25 16:08
 # @File    : test_progress_dialog.py
 from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QWidget, QPushButton,QCommonStyle
+from PyQt5.QtWidgets import QWidget, QPushButton
 
 from SomeWidgets import SProgressDialog
 
@@ -20,13 +20,14 @@ class Window(QWidget):
     def show_progress(self):
         self.spd = SProgressDialog(self, label_text='loading...')
         self.spd.setModal(True)
-        # 隐藏取消按钮
-        # self.spd.hide_cancel_button()
         # 获取标签文本
         print(self.spd.label_text)
         # 获取取消那妞
         cancel_button = self.spd.cancel_button
-        print(cancel_button)
+        # 隐藏取消按钮
+        # cancel_button.hide()
+        # 取消阴影
+        # self.spd.hide_shadow()
         # 获取Qss
         print(self.spd.qss)
         self.spd.show()
