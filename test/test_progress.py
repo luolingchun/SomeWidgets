@@ -2,7 +2,7 @@
 # @Author  : llc
 # @Email   : luolingchun.com@gmail.com
 # @Time    : 2019/8/25 16:08
-# @File    : test_progress_dialog.py
+# @File    : test_progress.py
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QWidget, QPushButton
 
@@ -13,7 +13,7 @@ class Window(QWidget):
     def __init__(self):
         super(Window, self).__init__()
 
-        self.resize(500, 500)
+        self.resize(500, 300)
         pushbutton = QPushButton('test', self)
         pushbutton.clicked.connect(self.show_progress)
 

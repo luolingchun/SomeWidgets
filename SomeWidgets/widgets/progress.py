@@ -2,7 +2,7 @@
 # @Author  : llc
 # @Email   : luolingchun.com@gmail.com
 # @Time    : 2019/8/25 15:28
-# @File    : progress_dialog.py
+# @File    : progress.py
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QGridLayout, QLabel, QProgressBar, QPushButton, QWidget, QHBoxLayout, \
     QGraphicsDropShadowEffect
@@ -21,43 +21,43 @@ class SProgressDialog(QDialog):
 
         # QSS
         self._qss = """
-#SProgressDialog > QWidget{
-	border:0px solid green;
-	border-radius:10px;
-	background-color:rgba(100, 200, 0, 70%);
-}
-
-#SProgressDialog > QWidget > QLabel{
-	border:0px;
-	font-size:14px;
-}
-
-#SProgressDialog > QWidget > QPushButton{
-	border:0px;
-	min-width:40px;
-	min-height:20px;
-	font-size:12px;
-}
-
-#SProgressDialog > QWidget > QPushButton:hover{
-	border-radius:10px;
-	font-size:12px;
-	background-color:rgba(200, 100, 0, 70%);
-}
-
-#SProgressDialog > QWidget > QProgressBar{
-	border:0px;
-	border-radius:7px;
-	max-height:14px;
-	text-align:center;
-	background-color:rgba(255, 255, 255, 70%);
-}
-
-#SProgressDialog > QWidget > QProgressBar::chunk {
-	border-radius:7px;
-	background-color:rgba(0, 100, 200, 70%);
-}
-        """
+                    #SProgressDialog > QWidget{
+                        border:0px solid green;
+                        border-radius:10px;
+                        background-color:rgba(100, 200, 100, 70%);
+                    }
+                    
+                    #SProgressDialog > QWidget > QLabel{
+                        border:0px;
+                        font-size:14px;
+                    }
+                    
+                    #SProgressDialog > QWidget > QPushButton{
+                        border:0px;
+                        min-width:40px;
+                        min-height:20px;
+                        font-size:12px;
+                    }
+                    
+                    #SProgressDialog > QWidget > QPushButton:hover{
+                        border-radius:10px;
+                        font-size:12px;
+                        background-color:rgba(200, 100, 100, 70%);
+                    }
+                    
+                    #SProgressDialog > QWidget > QProgressBar{
+                        border:0px;
+                        border-radius:7px;
+                        max-height:14px;
+                        text-align:center;
+                        background-color:rgba(255, 255, 255, 70%);
+                    }
+                    
+                    #SProgressDialog > QWidget > QProgressBar::chunk {
+                        border-radius:7px;
+                        background-color:rgba(100, 100, 200, 70%);
+                    }
+                """
         self.setStyleSheet(self._qss)
 
     def _setup_ui(self, label_text):

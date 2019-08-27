@@ -9,8 +9,16 @@ python setup.py install
 
 ## SProgressDialog
 
-- [案例](test/test_progress_dialog.py)
+- [案例](test/test_progress.py)
 
 - 效果图
 
   ![SProgressDialog](./screen/SProgressDialog.gif)
+
+## SMessageBox
+
+- [案例](test/test_message.py)
+
+- 效果图
+
+  ![SMessageBox](./screen/SMessageBox.gif)

@@ -6,4 +6,5 @@
 
 __version__ = '0.0.1'
 
-from .widgets.progress_dialog import SProgressDialog
+from .widgets.progress import SProgressDialog
+from .widgets.message import SMessageBox
