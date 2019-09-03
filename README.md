@@ -13,7 +13,7 @@ python setup.py install
 
 - 效果图
 
-  ![SProgressDialog](./screen/SProgressDialog.gif)
+  ![SProgressDialog](screen/SProgressDialog.gif)
 
 ## SMessageBox
 
@@ -21,4 +21,12 @@ python setup.py install
 
 - 效果图
 
-  ![SMessageBox](./screen/SMessageBox.gif)
+  ![SMessageBox](screen/SMessageBox.gif)
+
+## SSwitchButton
+
+- [案例](test/test_switch.py)
+
+- 效果图
+
+  ![SSwitchButton](./screen/SSwitchButton.gif)

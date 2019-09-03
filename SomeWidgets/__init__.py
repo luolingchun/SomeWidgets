@@ -8,3 +8,4 @@ __version__ = '0.0.1'
 
 from .widgets.progress import SProgressDialog
 from .widgets.message import SMessageBox
+from .widgets.switch import SSwitchButton
