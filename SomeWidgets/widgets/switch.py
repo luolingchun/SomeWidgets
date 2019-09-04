@@ -10,21 +10,26 @@ from PyQt5.QtWidgets import QWidget, QLabel, QStyleOption, QStyle
 class SSwitchButton(QWidget):
     ActiveChanged = pyqtSignal(bool)
 
-    def __init__(self, parent=None, animation=QEasingCurve.OutBack):
+    def __init__(self, parent=None, width=60, height=30, margin=3, animation=QEasingCurve.OutBack):
         super(SSwitchButton, self).__init__(parent)
         self.setObjectName('SSwitchButton')
 
-        self.opened = False
-        self._start_point = QPoint(3, 3)
-        self._end_point = QPoint(33, 3)
+        self._width = width
+        self._height = height
+        self._margin = margin
 
-        self.setMinimumSize(60, 30)
-        self.setMaximumSize(60, 30)
-        self.resize(60, 30)
+        self.opened = False
+        self._ball_size = height - 2 * margin
+        self._start_point = QPoint(margin, margin)
+        self._end_point = QPoint(width - self._ball_size - margin, margin)
+
+        self.setMinimumSize(width, height)
+        self.setMaximumSize(width, height)
+        self.resize(width, height)
 
         self._label = QLabel(self)
         self._label.setObjectName('SButton')
-        self._label.resize(24, 24)
+        self._label.resize(self._ball_size, self._ball_size)
         self._label.move(self._start_point)
 
         self._animation = QPropertyAnimation(self)
@@ -34,57 +39,57 @@ class SSwitchButton(QWidget):
         self._animation.setDuration(300)
 
         self.setStyleSheet(
-            """
-            #SSwitchButton{
+            f"""
+            #SSwitchButton{{
                 border:0px solid #dadada;
-                border-radius:15px;
+                border-radius:{self._height / 2}px;
                 background-color: #dadada;
-            }
-            #SButton{
+            }}
+            #SButton{{
                 border:0px;
-                border-radius:12px;
+                border-radius:{self._ball_size / 2}px;
                 background-color: white;
-            }
+            }}
             """
         )
 
     def mousePressEvent(self, event):
-        if self._label.pos() == QPoint(3, 3):
+        if self._label.pos() == self._start_point:
             self._animation.setStartValue(self._start_point)
             self._animation.setEndValue(self._end_point)
             self._animation.start()
             self.opened = True
             self.setStyleSheet(
-                """
-                #SSwitchButton{
+                f"""
+                #SSwitchButton{{
                     border:0px solid #dadada;
-                    border-radius:15px;
+                    border-radius:{self._height / 2}px;
                     background-color: #00EE00;
-                }
-                #SButton{
+                }}
+                #SButton{{
                     border:0px;
-                    border-radius:12px;
+                    border-radius:{self._ball_size / 2}px;
                     background-color: white;
-                }
+                }}
                 """
             )
-        elif self._label.pos() == QPoint(33, 3):
+        elif self._label.pos() == self._end_point:
             self._animation.setStartValue(self._end_point)
             self._animation.setEndValue(self._start_point)
             self._animation.start()
             self.opened = False
             self.setStyleSheet(
-                """
-                #SSwitchButton{
+                f"""
+                #SSwitchButton{{
                     border:0px solid #dadada;
-                    border-radius:15px;
+                    border-radius:{self._height / 2}px;
                     background-color: #dadada;
-                }
-                #SButton{
+                }}
+                #SButton{{
                     border:0px;
-                    border-radius:12px;
+                    border-radius:{self._ball_size / 2}px;
                     background-color: white;
-                }
+                }}
                 """
             )
         else:
@@ -98,21 +103,3 @@ class SSwitchButton(QWidget):
         opt.initFrom(self)
         painter = QPainter(self)
         self.style().drawPrimitive(QStyle.PE_Widget, opt, painter, self)
-
-
-if __name__ == '__main__':
-    from PyQt5.QtWidgets import QApplication, QWidget
-
-    app = QApplication([])
-    window = QWidget()
-    window.resize(500, 500)
-    ssb = SSwitchButton(window)
-    ssb.move(200, 200)
-    window.show()
-
-    # from pyqss import Qss
-    #
-    # qss = Qss(window)
-    # qss.show()
-
-    app.exec_()

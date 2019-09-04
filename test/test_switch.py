@@ -19,9 +19,11 @@ class Window(QWidget):
         count = 0
         for x in range(3):
             for y in range(3):
-                ssb = SSwitchButton(self, animation=animation[count])
+                # ssb = SSwitchButton(self, animation=animation[count])
+                width, height, margin = 100, 50, 5
+                ssb = SSwitchButton(self, width=width, height=height, margin=margin, animation=animation[count])
                 ssb.ActiveChanged.connect(lambda opened: print(opened))
-                ssb.move(x * 70 + 100, y * 70 + 100)
+                ssb.move(x * (width + 5) + 100, y * (height + 10) + 100)
                 count += 1
 
 
