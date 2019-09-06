@@ -18,7 +18,7 @@ class SSwitchButton(QWidget):
         self._height = height
         self._margin = margin
 
-        self.opened = False
+        self._opened = False
         self._ball_size = height - 2 * margin
         self._start_point = QPoint(margin, margin)
         self._end_point = QPoint(width - self._ball_size - margin, margin)
@@ -53,12 +53,16 @@ class SSwitchButton(QWidget):
             """
         )
 
+    @property
+    def opened(self):
+        return self._opened
+
     def mousePressEvent(self, event):
         if self._label.pos() == self._start_point:
             self._animation.setStartValue(self._start_point)
             self._animation.setEndValue(self._end_point)
             self._animation.start()
-            self.opened = True
+            self._opened = True
             self.setStyleSheet(
                 f"""
                 #SSwitchButton{{
@@ -77,7 +81,7 @@ class SSwitchButton(QWidget):
             self._animation.setStartValue(self._end_point)
             self._animation.setEndValue(self._start_point)
             self._animation.start()
-            self.opened = False
+            self._opened = False
             self.setStyleSheet(
                 f"""
                 #SSwitchButton{{
@@ -95,7 +99,7 @@ class SSwitchButton(QWidget):
         else:
             return
 
-        self.ActiveChanged.emit(self.opened)
+        self.ActiveChanged.emit(self._opened)
 
     def paintEvent(self, event):
         super(SSwitchButton, self).paintEvent(event)
