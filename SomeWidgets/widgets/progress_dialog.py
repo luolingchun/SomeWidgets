@@ -2,7 +2,7 @@
 # @Author  : llc
 # @Email   : luolingchun.com@gmail.com
 # @Time    : 2019/8/25 15:28
-# @File    : progress.py
+# @File    : progress_dialog.py
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QGridLayout, QLabel, QProgressBar, QPushButton, QWidget, QHBoxLayout, \
     QGraphicsDropShadowEffect
@@ -12,11 +12,12 @@ class SProgressDialog(QDialog):
     def __init__(self, parent=None, label_text=''):
         super(SProgressDialog, self).__init__(parent)
 
+        self.setObjectName('SProgressDialog')
+
         self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
 
         self._setup_ui(label_text)
-        self.setObjectName('SProgressDialog')
         self.resize(400, 100)
 
         # QSS
@@ -90,8 +91,8 @@ class SProgressDialog(QDialog):
         return self._progress_bar.value()
 
     @value.setter
-    def value(self, value):
-        self._progress_bar.setValue(value)
+    def value(self, v):
+        self._progress_bar.setValue(v)
 
     @property
     def qss(self):

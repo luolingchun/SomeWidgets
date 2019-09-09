@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2019/9/3 9:47
 # @Author  : llc
-# @File    : switch.py
+# @File    : switch_button.py
 from PyQt5.QtCore import pyqtSignal, QPoint, QPropertyAnimation, QEasingCurve
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QWidget, QLabel, QStyleOption, QStyle
@@ -54,7 +54,7 @@ class SSwitchButton(QWidget):
         )
 
     @property
-    def opened(self):
+    def is_opened(self):
         return self._opened
 
     def mousePressEvent(self, event):
@@ -99,7 +99,7 @@ class SSwitchButton(QWidget):
         else:
             return
 
-        self.ActiveChanged.emit(self._opened)
+        self.ActiveChanged.emit(self.is_opened)
 
     def paintEvent(self, event):
         super(SSwitchButton, self).paintEvent(event)

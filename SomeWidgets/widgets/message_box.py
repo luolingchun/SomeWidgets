@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2019/8/27 9:03
 # @Author  : llc
-# @File    : message.py
+# @File    : message_box.py
 from PyQt5.QtCore import QTimer, Qt, QPropertyAnimation, QPoint
 from PyQt5.QtWidgets import QLabel, QGraphicsDropShadowEffect
 
@@ -9,6 +9,8 @@ from PyQt5.QtWidgets import QLabel, QGraphicsDropShadowEffect
 class SMessageBox(QLabel):
     def __init__(self, parent=None, ttl=3):
         super(SMessageBox, self).__init__(parent)
+
+        self.setObjectName('SMessageBox')
 
         self.setWindowFlags(Qt.FramelessWindowHint)
 

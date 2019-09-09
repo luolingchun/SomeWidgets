@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2019/9/3 13:06
 # @Author  : llc
-# @File    : test_switch.py
+# @File    : test_switch_button.py
 from PyQt5.QtCore import QEasingCurve
 from PyQt5.QtWidgets import QWidget
 

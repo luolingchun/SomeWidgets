@@ -9,7 +9,7 @@ python setup.py install
 
 ## SProgressDialog
 
-- [案例](test/test_progress.py)
+- [案例](test/test_progress_dialog.py)
 
 - 效果图
 
@@ -17,7 +17,7 @@ python setup.py install
 
 ## SMessageBox
 
-- [案例](test/test_message.py)
+- [案例](test/test_message_box.py)
 
 - 效果图
 
@@ -25,8 +25,16 @@ python setup.py install
 
 ## SSwitchButton
 
-- [案例](test/test_switch.py)
+- [案例](test/test_switch_button.py)
 
 - 效果图
 
   ![SSwitchButton](./screen/SSwitchButton.gif)
+  
+## SSMediaSlider
+
+- [案例](test/test_media_slider.py)
+
+- 效果图
+
+  ![SSwitchButton](./screen/SSMediaSlider.gif)

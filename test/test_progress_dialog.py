@@ -2,7 +2,7 @@
 # @Author  : llc
 # @Email   : luolingchun.com@gmail.com
 # @Time    : 2019/8/25 16:08
-# @File    : test_progress.py
+# @File    : test_progress_dialog.py
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QWidget, QPushButton
 

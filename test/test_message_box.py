@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2019/8/27 9:50
 # @Author  : llc
-# @File    : test_message.py
+# @File    : test_message_box.py
 from PyQt5.QtWidgets import QWidget, QPushButton
 
 from SomeWidgets import SMessageBox

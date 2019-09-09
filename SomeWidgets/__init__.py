@@ -6,6 +6,7 @@
 
 __version__ = '0.0.1'
 
-from .widgets.progress import SProgressDialog
-from .widgets.message import SMessageBox
-from .widgets.switch import SSwitchButton
+from .widgets.progress_dialog import SProgressDialog
+from .widgets.message_box import SMessageBox
+from .widgets.switch_button import SSwitchButton
+from .widgets.media_slider import SMediaSlider
