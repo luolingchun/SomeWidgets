@@ -33,6 +33,7 @@ class Window(QMainWindow):
 
         self.sms.left = '0:00:00'
         self.sms.right = max_time
+        # self.sms.value=350
 
     def update_time(self, v):
         s = v % 60

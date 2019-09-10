@@ -85,6 +85,14 @@ class SMediaSlider(QWidget):
     def right(self, text):
         self._right_label.setText(text)
 
+    @property
+    def value(self):
+        return self._slider.value()
+
+    @value.setter
+    def value(self, v):
+        self._slider.setValue(v)
+
 
 class Slider(QSlider):
     def __init__(self, parent=None):
@@ -92,9 +100,9 @@ class Slider(QSlider):
 
     def mousePressEvent(self, e):
         super(Slider, self).mousePressEvent(e)
-        x = e.pos().x()
         if self.isSliderDown():
             return
+        x = e.pos().x()
         per = x * 1.0 / self.width()
         value = per * (self.maximum() - self.minimum()) + self.minimum()
         self.setValue(value)
