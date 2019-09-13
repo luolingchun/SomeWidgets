@@ -5,13 +5,13 @@
 import math
 
 from PyQt5.QtCore import QPoint, Qt
-from PyQt5.QtGui import QPainter, QColor, QPolygon, QLinearGradient, QBrush, QPen
+from PyQt5.QtGui import QPainter, QColor, QPolygon, QBrush, QPen
 from PyQt5.QtWidgets import QWidget
 
 
-class SWidget(QWidget):
-    def __init__(self, color1=QColor(0, 128, 0), color2=QColor(255, 255, 255), parent=None):
-        super(SWidget, self).__init__(parent)
+class SHWidget(QWidget):
+    def __init__(self, color1, color2, parent=None):
+        super(SHWidget, self).__init__(parent)
         self.p1 = QPoint(0, 0)
         self.p2 = QPoint(0, 0)
         self.p3 = QPoint(0, 0)
@@ -19,6 +19,8 @@ class SWidget(QWidget):
         self.color1 = color1
         self.color2 = color2
         self._value = 0
+        self.p = 0
+        self.opacity = 0.5
 
     @property
     def value(self):
@@ -31,7 +33,7 @@ class SWidget(QWidget):
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        painter.setOpacity(0.7)
+        painter.setOpacity(self.opacity)
         painter.setRenderHint(QPainter.Antialiasing, True)
         painter.setPen(Qt.white)
         painter.save()
@@ -39,29 +41,53 @@ class SWidget(QWidget):
         painter.setBrush(brush)
         points = [self.p1,
                   self.p2,
-                  QPoint(self.p2.x() + int(self.width() * self._value / 100), self.p2.y()),
-                  QPoint(self.p1.x() + int(self.width() * self._value / 100), self.p1.y())]
+                  QPoint(self.p2.x() + self.p, self.p2.y()),
+                  QPoint(self.p1.x() + self.p, self.p1.y())]
         painter.drawPolygon(QPolygon(points))
         painter.restore()
         brush = QBrush(self.color2)
         painter.setBrush(brush)
-        points = [QPoint(self.p1.x() + int(self.width() * self._value / 100), self.p1.y()),
-                  QPoint(self.p2.x() + int(self.width() * self._value / 100), self.p2.y()),
-                  self.p3,
-                  self.p4]
+        points = [
+            QPoint(self.p1.x() + self.p, self.p1.y()),
+            QPoint(self.p2.x() + self.p, self.p2.y()),
+            self.p3,
+            self.p4]
+        painter.drawPolygon(QPolygon(points))
+
+
+class SVWidget(QWidget):
+    def __init__(self, color, pen_style=Qt.SolidLine, parent=None):
+        super(SVWidget, self).__init__(parent)
+        self.p1 = QPoint(0, 0)
+        self.p2 = QPoint(0, 0)
+        self.p3 = QPoint(0, 0)
+        self.p4 = QPoint(0, 0)
+        self.color = color
+        self.pen = QPen(color)
+        self.pen.setStyle(pen_style)
+        self.opacity = 0.5
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setOpacity(self.opacity)
+        painter.setRenderHint(QPainter.Antialiasing, True)
+        painter.setPen(self.pen)
+        brush = QBrush(self.color)
+        painter.setBrush(brush)
+        points = [self.p1, self.p2, self.p3, self.p4]
         painter.drawPolygon(QPolygon(points))
 
 
 class SThreeProgress(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, color1=QColor(0, 200, 0), color2=QColor(255, 255, 255), opacity=0.5, parent=None):
         super(SThreeProgress, self).__init__(parent)
 
-        self.setStyleSheet(
-            """background-color:rgb(62, 61, 50)""")
+        self._sw1 = SHWidget(color1, color2, parent=self)
+        self._sw2 = SHWidget(color1, color2, parent=self)
+        self._sw3 = SVWidget(color=color1, pen_style=Qt.DashLine, parent=self)
+        self._sw4 = SVWidget(color=color2, parent=self)
 
-        self.sw1 = SWidget(parent=self)
-        self.sw2 = SWidget(parent=self)
-        self.sw3 = SWidget(parent=self)
+        self._opacity = opacity
 
         self.resize(self.size())
 
@@ -73,70 +99,85 @@ class SThreeProgress(QWidget):
 
     @value.setter
     def value(self, v):
+        if v < 0:
+            v = 0
+        elif v > 100:
+            v = 100
         self._value = v
-        self.sw1.value = v
-        self.sw2.value = v
+        self._sw1.value = v
+        self._sw2.value = v
+        self.resizeEvent()
+
+    @property
+    def opacity(self):
+        return self._opacity
+
+    @opacity.setter
+    def opacity(self, o):
+        self._opacity = o
+        self._sw1.opacity = o
+        self._sw2.opacity = o
+        self._sw3.opacity = o
+        self._sw4.opacity = o
         self.resizeEvent()
 
     def resizeEvent(self, event=None):
         """
-            #####################
-           #                  # #
-          #        sw1       #  #
-         #                  #   #
-        #################### sw3#
-        #                  #   #
-        #          sw2     #  #
-        #                  # #
-        ####################
-        :param event:
-        :return:
+            ##########################################
+           #                  # #                  # #
+          #        _sw1       #  #         _sw1     #  #
+         #                  #   #                #   #
+        #################### _sw4################# _sw4#
+        #                  #   #                #   #
+        #          _sw2     #  #          _sw2    #  #
+        #                  # #                  # #
+        #########################################
         """
-        self.sw1.resize(self.size())
-        sw1_width = self.width()
-        sw1_height = self.height() * 0.4
-        self.sw1.p1 = QPoint(sw1_height * math.tan(math.pi / 6), 0)
-        self.sw1.p2 = QPoint(0, sw1_height)
-        self.sw1.p3 = QPoint(sw1_width - sw1_height * math.tan(math.pi / 6), sw1_height)
-        self.sw1.p4 = QPoint(sw1_width, 0)
+        self.off = self.height() * 0.4 * math.tan(math.pi / 6)
+        p = (self.width() - self.off) * self._value / 100
+        self._sw1.resize(self.size())
+        self._sw1.p1 = QPoint(self.off, 0)
+        self._sw1.p2 = QPoint(0, self.height() * 0.4)
+        self._sw1.p3 = QPoint(self.width() - self.off, self.height() * 0.4)
+        self._sw1.p4 = QPoint(self.width(), 0)
+        self._sw1.p = p
 
-        self.sw2.resize(self.size())
-        sw2_width = self.width()
-        sw2_height = self.height() * 0.6
-        self.sw2.p1 = self.sw1.p2
-        self.sw2.p2 = QPoint(0, self.height())
-        self.sw2.p3 = QPoint(sw2_width - sw1_height * math.tan(math.pi / 6), self.height())
-        self.sw2.p4 = self.sw1.p3
+        self._sw2.resize(self.size())
+        self._sw2.p1 = self._sw1.p2
+        self._sw2.p2 = QPoint(0, self.height())
+        self._sw2.p3 = QPoint(self.width() - self.off, self.height())
+        self._sw2.p4 = self._sw1.p3
+        self._sw2.p = p
 
-        self.sw3.resize(self.size())
-        self.sw3.p1 = self.sw1.p3
-        self.sw3.p2 = self.sw2.p3
-        self.sw3.p3 = QPoint(self.width(), sw2_height)
-        self.sw3.p4 = self.sw1.p4
+        self._sw3.resize(self.size())
+        self._sw3.p1 = QPoint(p, self.height() * 0.4)
+        self._sw3.p2 = QPoint(p, self.height())
+        self._sw3.p3 = QPoint(self.off + p, self.height() * 0.6)
+        self._sw3.p4 = QPoint(self.off + p, 0)
+
+        self._sw4.resize(self.size())
+        self._sw4.p1 = self._sw1.p3
+        self._sw4.p2 = self._sw2.p3
+        self._sw4.p3 = QPoint(self.width(), self.height() * 0.6)
+        self._sw4.p4 = self._sw1.p4
+
+        if p == 100:
+            self._sw4.hide()
+        else:
+            self._sw4.show()
+
         self.update()
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        painter.setOpacity(0.5)
+        painter.setOpacity(self._opacity)
         painter.setRenderHint(QPainter.Antialiasing, True)
         pen = QPen(Qt.DashLine)
         pen.setColor(Qt.white)
-        brush = QBrush(Qt.green)
         painter.setPen(pen)
-        # painter.setBrush(brush)
-        painter.save()
-        painter.drawPolyline(self.sw1.p1, QPoint(self.height() * 0.4 * math.tan(math.pi / 6), self.height() * 0.6))
-        painter.restore()
-        painter.drawPolyline(self.sw2.p2, QPoint(self.height() * 0.4 * math.tan(math.pi / 6), self.height() * 0.6))
-        painter.save()
-        painter.drawPolyline(QPoint(self.height() * 0.4 * math.tan(math.pi / 6), self.height() * 0.6), self.sw3.p3)
-        # painter.restore()
-        # points = [QPoint(),
-        #           self.sw2.p3,
-        #           QPoint(self.sw2.p3.x() + self.height() * 0.4 * math.tan(math.pi / 6), self.height() * 0.6),
-        #           self.sw1.p4
-        #           ]
-        # painter.drawPolygon(QPolygon(points))
+        painter.drawPolyline(self._sw1.p1, QPoint(self.off, self.height() * 0.6))
+        painter.drawPolyline(self._sw2.p2, QPoint(self.off, self.height() * 0.6))
+        painter.drawPolyline(QPoint(self.off, self.height() * 0.6), self._sw4.p3)
 
 
 if __name__ == '__main__':
@@ -144,7 +185,8 @@ if __name__ == '__main__':
 
     app = QApplication([])
     window = SThreeProgress()
+    window.setStyleSheet("""background-color:#272822""")
     window.show()
     window.resize(600, 200)
-    window.value = 95
+    window.value = 100
     app.exec_()

@@ -38,3 +38,12 @@ python setup.py install
 - 效果图
 
   ![SSwitchButton](./screen/SSMediaSlider.gif)
+
+## SThreeProgress
+
+- [案例](test/test_three_progress.py)
+
+- 效果图
+
+  ![SThreeProgress](./screen/SThreeProgress.gif)
+

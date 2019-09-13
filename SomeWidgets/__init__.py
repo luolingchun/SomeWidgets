@@ -10,3 +10,4 @@ from .widgets.progress_dialog import SProgressDialog
 from .widgets.message_box import SMessageBox
 from .widgets.switch_button import SSwitchButton
 from .widgets.media_slider import SMediaSlider
+from .widgets.three_progress import SThreeProgress

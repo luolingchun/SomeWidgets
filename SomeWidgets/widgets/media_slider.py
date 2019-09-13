@@ -3,7 +3,6 @@
 # @Author  : llc
 # @File    : media_slider.py
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QMouseEvent
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QSlider
 
 
