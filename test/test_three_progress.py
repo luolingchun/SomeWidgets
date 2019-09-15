@@ -5,7 +5,7 @@
 # @File    : test_three_progress.py
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QPushButton, QDialog, QSlider, QGraphicsDropShadowEffect
+from PyQt5.QtWidgets import QPushButton, QDialog, QSlider
 
 from SomeWidgets import SThreeProgress
 
