@@ -2,12 +2,12 @@
 # @Author  : llc
 # @Email   : luolingchun.com@gmail.com
 # @Time    : 2019/9/13 12:06
-# @File    : test_three_progress.py
+# @File    : test_cuboid_progress.py
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QPushButton, QDialog, QSlider
 
-from SomeWidgets import SThreeProgress
+from SomeWidgets import SCuboidProgress
 
 
 class Window(QDialog):
@@ -31,17 +31,17 @@ class Window(QDialog):
         slider.move(200, 0)
         slider.valueChanged.connect(self.slider_valueChanged)
 
-        self.stp1 = SThreeProgress(color1=QColor(254, 154, 227), parent=self)
-        self.stp1.move(100, 100)
-        self.stp1.resize(300, 50)
+        self.scp1 = SCuboidProgress(color1=QColor(254, 154, 227), parent=self)
+        self.scp1.move(100, 100)
+        self.scp1.resize(300, 50)
 
-        self.stp2 = SThreeProgress(color1=QColor(174, 255, 126), parent=self)
-        self.stp2.move(100, 200)
-        self.stp2.resize(300, 50)
+        self.scp2 = SCuboidProgress(color1=QColor(174, 255, 126), parent=self)
+        self.scp2.move(100, 200)
+        self.scp2.resize(300, 50)
 
-        self.stp3 = SThreeProgress(color1=QColor(165, 217, 255), parent=self)
-        self.stp3.move(100, 300)
-        self.stp3.resize(300, 50)
+        self.scp3 = SCuboidProgress(color1=QColor(165, 217, 255), parent=self)
+        self.scp3.move(100, 300)
+        self.scp3.resize(300, 50)
 
         slider.setValue(50)
 
@@ -56,27 +56,27 @@ class Window(QDialog):
         self.timer.timeout.connect(self.update_progress2)
 
     def update_progress1(self):
-        if self.stp1.value <= 99:
-            self.stp1.value += 1
-            self.stp2.value += 1
-            self.stp3.value += 1
+        if self.scp1.value <= 99:
+            self.scp1.value += 1
+            self.scp2.value += 1
+            self.scp3.value += 1
         else:
             self.timer.stop()
 
     def update_progress2(self):
-        if self.stp1.value >= 1:
-            self.stp1.value -= 1
-            self.stp2.value -= 1
-            self.stp3.value -= 1
+        if self.scp1.value >= 1:
+            self.scp1.value -= 1
+            self.scp2.value -= 1
+            self.scp3.value -= 1
         else:
             self.timer.stop()
 
     def slider_valueChanged(self, v):
         print(v)
         o = v / 100
-        self.stp1.opacity = o
-        self.stp2.opacity = o
-        self.stp3.opacity = o
+        self.scp1.opacity = o
+        self.scp2.opacity = o
+        self.scp3.opacity = o
 
 
 if __name__ == '__main__':

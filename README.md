@@ -39,11 +39,18 @@ python setup.py install
 
   ![SSwitchButton](./screen/SSMediaSlider.gif)
 
-## SThreeProgress
+## SCuboidProgress
 
-- [案例](test/test_three_progress.py)
+- [案例](test/test_cuboid_progress.py)
 
 - 效果图
 
-  ![SThreeProgress](./screen/SThreeProgress.gif)
+  ![SCuboidProgress](./screen/SCuboidProgress.gif)
 
+## SCylinderProgress
+
+- [案例](test/test_cylinder_progress.py)
+
+- 效果图
+
+  ![SCuboidProgress](./screen/SCylinderProgress.gif)
