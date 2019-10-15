@@ -54,3 +54,11 @@ python setup.py install
 - 效果图
 
   ![SCuboidProgress](./screen/SCylinderProgress.gif)
+
+## SLineLoading
+
+- [案例](test/test_line_loading.py)
+
+- 效果图
+
+  ![SLineLoading](./screen/SLineLoading.gif)
