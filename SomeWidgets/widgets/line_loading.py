@@ -43,7 +43,8 @@ class SLineLoading(QWidget):
         self._ball_radius = ball_radius
         self._ball_numbers = 5
         self.duration = duration
-        self._ec = QEasingCurve.OutSine
+        self._ec1 = QEasingCurve.OutSine
+        self._ec2 = QEasingCurve.InSine
         self._first_flag = self._three_flag = 0.2
         self._second_flag = 0.6
         self.duration_pause = duration_pause
@@ -66,13 +67,13 @@ class SLineLoading(QWidget):
             # 第一段
             par_animation1 = QParallelAnimationGroup(self)
             pa = QPropertyAnimation(self._balls[i], b'pos', self)
-            pa.setEasingCurve(self._ec)
+            pa.setEasingCurve(self._ec1)
             pa.setDuration(self.duration * self._first_flag)
             pa.setStartValue(QPoint(0, bh))
             pa.setEndValue(QPoint(width * 0.4, bh))
             par_animation1.addAnimation(pa)
             pa = QPropertyAnimation(self._balls[i], b'_style', self)
-            pa.setEasingCurve(self._ec)
+            pa.setEasingCurve(self._ec1)
             pa.setDuration(self.duration * self._first_flag)
             pa.setStartValue(0)
             pa.setEndValue(255)
@@ -87,13 +88,13 @@ class SLineLoading(QWidget):
             # 第三段
             par_animation2 = QParallelAnimationGroup(self)
             pa = QPropertyAnimation(self._balls[i], b'pos', self)
-            pa.setEasingCurve(self._ec)
+            pa.setEasingCurve(self._ec2)
             pa.setDuration(self.duration * self._three_flag)
             pa.setStartValue(QPoint(width * 0.6, bh))
             pa.setEndValue(QPoint(width, bh))
             par_animation2.addAnimation(pa)
             pa = QPropertyAnimation(self._balls[i], b'_style', self)
-            pa.setEasingCurve(self._ec)
+            pa.setEasingCurve(self._ec2)
             pa.setDuration(self.duration * self._three_flag)
             pa.setStartValue(255)
             pa.setEndValue(0)
