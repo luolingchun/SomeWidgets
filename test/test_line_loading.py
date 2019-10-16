@@ -13,19 +13,19 @@ class Window(QWidget):
         self.resize(800, 500)
         self.pushbutton = QPushButton('start', self)
 
-        sll1 = SLineLoading(ball_radius=5, duration=2000, duration_pause=120, parent=self)
+        sll1 = SLineLoading(ball_radius=5, duration=3000, duration_pause=150, parent=self)
         sll1.resize(800, 100)
         sll1.move(0, 50)
 
-        sll2 = SLineLoading(ball_radius=5, ball_color=(200, 100, 100), duration=2000, duration_pause=120, parent=self)
+        sll2 = SLineLoading(ball_radius=5, ball_color=(200, 100, 100), duration=3000, duration_pause=150, parent=self)
         sll2.resize(800, 100)
         sll2.move(0, 150)
 
-        sll3 = SLineLoading(ball_radius=5, ball_color=(100, 100, 200), duration=2000, duration_pause=120, parent=self)
+        sll3 = SLineLoading(ball_radius=5, ball_color=(100, 100, 200), duration=3000, duration_pause=150, parent=self)
         sll3.resize(800, 100)
         sll3.move(0, 250)
 
-        sll4 = SLineLoading(ball_radius=5, ball_colour=True, duration=2000, duration_pause=120, parent=self)
+        sll4 = SLineLoading(ball_radius=5, ball_colour=True, duration=3000, duration_pause=150, parent=self)
         sll4.resize(800, 100)
         sll4.move(0, 350)
 

@@ -62,3 +62,11 @@ python setup.py install
 - 效果图
 
   ![SLineLoading](./screen/SLineLoading.gif)
+
+## SRoundLoading
+
+- [案例](test/test_round_loading.py)
+
+- 效果图
+
+  ![SRoundLoading](screen/SRoundLoading.gif)
