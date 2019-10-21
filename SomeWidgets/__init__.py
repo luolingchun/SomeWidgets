@@ -14,3 +14,4 @@ from .widgets.cuboid_progress import SCuboidProgress
 from .widgets.cylinder_progress import SCylinderProgress
 from .widgets.line_loading import SLineLoading
 from .widgets.round_loading import SRoundLoading
+from .widgets.round_time import SRoundTime

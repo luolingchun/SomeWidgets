@@ -31,7 +31,7 @@ python setup.py install
 
   ![SSwitchButton](./screen/SSwitchButton.gif)
   
-## SSMediaSlider
+## SMediaSlider
 
 - [案例](test/test_media_slider.py)
 
@@ -70,3 +70,11 @@ python setup.py install
 - 效果图
 
   ![SRoundLoading](screen/SRoundLoading.gif)
+
+## SRoundTime
+
+- [案例](test/test_round_time.py)
+
+- 效果图
+
+  ![SRoundLoading](screen/SRoundTime.gif)
