@@ -15,3 +15,4 @@ from .widgets.cylinder_progress import SCylinderProgress
 from .widgets.line_loading import SLineLoading
 from .widgets.round_loading import SRoundLoading
 from .widgets.round_time import SRoundTime
+from .widgets.color_panel import SColorPanel

@@ -78,3 +78,11 @@ python setup.py install
 - 效果图
 
   ![SRoundLoading](screen/SRoundTime.gif)
+  
+## SColorPanel
+
+- [案例](test/test_color_panel.py)
+
+- 效果图
+
+  ![SColorPanel](screen/SColorPanel.gif)
